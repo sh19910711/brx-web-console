@@ -1,0 +1,5 @@
+.bundle/
+log/*.log
+Gemfile.lock
+node_modules/
+dist/
