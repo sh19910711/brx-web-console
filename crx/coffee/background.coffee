@@ -30,3 +30,6 @@ chrome.webRequest.onHeadersReceived.addListener(
   filter
   extOpts
 )
+
+chrome.runtime.onMessage.addListener ->
+  console.log "message.js: on message", arguments
