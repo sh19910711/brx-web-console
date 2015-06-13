@@ -1,7 +1,9 @@
+sessionHash = {}
+
 callback = (details)->
   res = response(details)
   if sessionId = res.headers["X-Web-Console"]
-    console.log "enabled?"
+    sessionHash[details.tabId] = sessionId
 
 response = (details)->
   reduceFunc = (obj, headerInfo)->
