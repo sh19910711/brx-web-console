@@ -1,14 +1,17 @@
 gulp = require("gulp")
 
-gulp.task "templates", ->
-  streamify = require("streamify")
-  run    = require("gulp-run")
-  concat = require("gulp-concat")
-  rename = require("gulp-rename")
-  gulp.src ["web-console/lib/web_console/templates/**/*.js.erb"]
-    .pipe run("erb -r ./erb_helper", verbosity: 0)
-    .pipe rename(extname: "")
-    .pipe gulp.dest("dist/lib/")
+do -> # lib
+  gulp.task "lib/all"
+
+  gulp.task "lib/templates", ->
+    streamify = require("streamify")
+    run    = require("gulp-run")
+    concat = require("gulp-concat")
+    rename = require("gulp-rename")
+    gulp.src ["web-console/lib/web_console/templates/**/*.js.erb"]
+      .pipe run("erb -r ./erb_helper", verbosity: 0)
+      .pipe rename(extname: "")
+      .pipe gulp.dest("dist/lib/")
 
 gulp.task "build", [
   "build/crx"
@@ -23,7 +26,15 @@ do -> # crx
     "crx/html"
     "crx/img"
     "crx/coffee"
+    "crx/patch"
   ]
+
+  gulp.task "crx/lib", ["lib/all"], ->
+
+  gulp.task "crx/patch", ["crx/lib"], ->
+    run = require("gulp-run")
+    gulp.src ["patch/**/*.patch"]
+      .pipe run("patch -p0")
 
   gulp.task "crx/coffee", ->
     coffee = require("gulp-coffee")
@@ -39,7 +50,7 @@ do -> # crx
     gulp.src ["crx/manifest.json"]
       .pipe gulp.dest("dist/crx/")
 
-  gulp.task "crx/lib", ["templates"], ->
+  gulp.task "crx/lib", ["lib/all"], ->
     gulp.src ["dist/lib/**/*.js"]
       .pipe gulp.dest("dist/crx/lib/")
 
