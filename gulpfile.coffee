@@ -20,7 +20,20 @@ do -> # crx
   gulp.task "crx/all", [
     "crx/manifest.json"
     "crx/lib"
+    "crx/html"
+    "crx/img"
+    "crx/coffee"
   ]
+
+  gulp.task "crx/coffee", ->
+    coffee = require("gulp-coffee")
+    gulp.src ["crx/coffee/**/*.coffee"]
+      .pipe coffee()
+      .pipe gulp.dest("dist/crx/js/")
+
+  gulp.task "crx/img", ->
+    gulp.src ["img/**/*.png"]
+      .pipe gulp.dest("dist/crx/img/")
 
   gulp.task "crx/manifest.json", ->
     gulp.src ["crx/manifest.json"]
@@ -29,4 +42,8 @@ do -> # crx
   gulp.task "crx/lib", ["templates"], ->
     gulp.src ["dist/lib/**/*.js"]
       .pipe gulp.dest("dist/crx/lib/")
+
+  gulp.task "crx/html", ->
+    gulp.src ["crx/html/**/*.html"]
+      .pipe gulp.dest("dist/crx/html/")
 
