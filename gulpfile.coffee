@@ -13,11 +13,22 @@ do -> # lib
       .pipe rename(extname: "")
       .pipe gulp.dest("dist/lib/")
 
-gulp.task "build", [
-  "build/crx"
-]
+do -> # build
+  gulp.task "build", [
+    "build/crx"
+  ]
 
-gulp.task "build/crx", ["crx/all"]
+  gulp.task "build/crx", ["crx/all"]
+
+do -> # watch
+  gulp.task "watch", [
+    "watch/crx"
+  ]
+
+  gulp.task "watch/crx", ->
+    gulp.watch ["crx/coffee/**/*.coffee"], ["crx/coffee"]
+    gulp.watch ["crx/manifest.json"], ["crx/manifest.json"]
+    gulp.watch ["crx/html/**/*.html"], ["crx/html"]
 
 do -> # crx
   gulp.task "crx/all", [
@@ -57,4 +68,3 @@ do -> # crx
   gulp.task "crx/html", ->
     gulp.src ["crx/html/**/*.html"]
       .pipe gulp.dest("dist/crx/html/")
-
