@@ -2,5 +2,13 @@
   "name": "Rails Web Console",
   "version": "0.0.0",
   "manifest_version": 2,
-  "devtools_page": "html/devtools.html"
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "devtools_page": "html/devtools.html",
+  "permissions": [
+    "webRequest",
+    "http://*/",
+    "https://*/"
+  ]
 }
