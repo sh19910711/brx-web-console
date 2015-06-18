@@ -31,5 +31,8 @@ chrome.webRequest.onHeadersReceived.addListener(
   extOpts
 )
 
-chrome.runtime.onMessage.addListener ->
-  console.log "message.js: on message", arguments
+chrome.runtime.onMessage.addListener (req, sender, callback)->
+  if req.type == "session-id"
+    callback
+      sessionId: sessionHash[req.tabId]
+
