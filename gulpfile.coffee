@@ -1,7 +1,9 @@
 gulp = require("gulp")
 
 do -> # lib
-  gulp.task "lib/all"
+  gulp.task "lib/all", [
+    "lib/templates"
+  ]
 
   gulp.task "lib/templates", ->
     streamify = require("streamify")
@@ -39,8 +41,6 @@ do -> # crx
     "crx/coffee"
     "crx/patch"
   ]
-
-  gulp.task "crx/lib", ["lib/all"], ->
 
   gulp.task "crx/patch", ["crx/lib"], ->
     run = require("gulp-run")
