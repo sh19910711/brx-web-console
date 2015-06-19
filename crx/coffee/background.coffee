@@ -34,13 +34,24 @@ chrome.webRequest.onHeadersReceived.addListener(
   extOpts
 )
 
-chrome.runtime.onMessage.addListener (req, sender, callback)->
-  console.log "bg: onMessage"
-  if req.type == "tab-info"
+chrome.runtime.onMessage.addListener (req, sender, sendResponse)->
+  console.log "bg: onMessage: type = #{req.type}"
+  if req.type == "send-command"
+    info = tabInfo[req.tabId]
+    url = "#{info.remoteHost}console/repl_sessions/#{info.sessionId}"
+    params = "input=#{encodeURIComponent req.line}"
+    console.log "bg: send command: #{req.line}"
+    putRequest url, params, (xhr)->
+      console.log "bg: send response(#{xhr.responseText})"
+      sendResponse JSON.parse(xhr.responseText)
+    return true
+  else if req.type == "tab-info"
     console.log "bg: onMessage: tab-info(##{req.tabId})"
     info = tabInfo[req.tabId]
     unless typeof info.sessionId == undefined
       console.log "bg: response: sessionId=#{info.sessionId}"
       console.log "bg: response: remoteHost=#{info.remoteHost}"
-      callback info
+      sendResponse info
+      return true
+  return false
 
