@@ -1,5 +1,5 @@
 chrome.devtools.panels.create(
-  "Rails Web Console"
+  "Console (Rails)"
   "img/icon_128.png"
   "html/panel.html"
 )

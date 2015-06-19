@@ -8,7 +8,7 @@
   "devtools_page": "html/devtools.html",
   "permissions": [
     "webRequest",
-    "http://*/",
-    "https://*/"
+    "http://*/*",
+    "https://*/*"
   ]
 }
