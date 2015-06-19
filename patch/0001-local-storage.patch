@@ -1,5 +1,5 @@
-*** dist/crx/lib/console.js	2015-06-13 12:27:29.149412809 +0900
---- dist/crx/lib/console.js	2015-06-13 12:16:31.812486217 +0900
+*** dist/lib/console.js	2015-06-13 12:27:29.149412809 +0900
+--- dist/lib/console.js	2015-06-13 12:16:31.812486217 +0900
 ***************
 *** 5,11 ****
   function CommandStorage() {
