@@ -2,7 +2,6 @@ req =
   type: "tab-info"
   tabId: chrome.devtools.inspectedWindow.tabId
 
-console.log "panel: sendRequest"
 chrome.runtime.sendMessage req, (tabInfo)->
   console.log "panel: onResponse"
   if tabInfo.sessionId
