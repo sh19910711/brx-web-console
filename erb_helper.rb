@@ -1,4 +1,7 @@
 require "action_view"
+$:.push File.expand_path("../web-console/lib", __FILE__)
+require "action_dispatch"
+require "web_console"
 
 def view
   @view ||= create_view
