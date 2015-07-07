@@ -1,0 +1,19 @@
+*** tmp/templates/console.js	2015-06-13 12:27:29.149412809 +0900
+--- tmp/templates/console.js	2015-06-13 12:16:31.812486217 +0900
+***************
+*** 5,11 ****
+  function CommandStorage() {
+    this.previousCommands = [];
+    var previousCommandOffset = 0;
+!   var hasLocalStorage = typeof window.localStorage !== 'undefined';
+    var STORAGE_KEY = "web_console_previous_commands";
+    var MAX_STORAGE = 100;
+  
+--- 5,11 ----
+  function CommandStorage() {
+    this.previousCommands = [];
+    var previousCommandOffset = 0;
+!   var hasLocalStorage = false; // typeof window.localStorage !== 'undefined';
+    var STORAGE_KEY = "web_console_previous_commands";
+    var MAX_STORAGE = 100;
+  
