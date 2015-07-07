@@ -9,11 +9,15 @@ commandHandle = (line)->
   sendCommand line, (response)=>
     @writeOutput response.output
 
-do ->
+getTabInfo = (tabId, callback)->
   req =
     type: "tab-info"
-    tabId: chrome.devtools.inspectedWindow.tabId
-  chrome.runtime.sendMessage req, (tabInfo)->
+    tabId: tabId
+  chrome.runtime.sendMessage req, callback
+
+do ->
+  tabId = chrome.devtools.inspectedWindow.tabId
+  getTabInfo tabId, (tabInfo)->
     if tabInfo.sessionId
       remotePath = "#{tabInfo.remoteHost}console/repl_sessions/#{tabInfo.sessionId}"
       options =
