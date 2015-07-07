@@ -1,18 +1,12 @@
-puts "before require pathname"
 require "pathname"
+
 def root(path = "")
   Pathname(File.expand_path "../../", __FILE__).join(path).to_s
 end
-puts "after push load path"
 
-puts "before load action_view"
 require "action_view"
-puts "before load action_dispatch"
 require "action_dispatch"
-puts "before load web_console"
 require "web_console"
-
-puts "after require web_console"
 
 def view
   @__view ||= create_view
@@ -44,5 +38,3 @@ end
     "fake-session-id"
   end
 end.new
-
-puts "end of helper"
