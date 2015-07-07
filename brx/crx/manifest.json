@@ -1,0 +1,14 @@
+{
+  "name": "Rails Web Console",
+  "version": "0.0.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["lib/console.js", "js/background.js"]
+  },
+  "devtools_page": "html/devtools.html",
+  "permissions": [
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
